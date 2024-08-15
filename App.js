@@ -1,20 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useContext } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { AuthContext, AuthProvider } from './context/auth';
+import AppNavigator from './components/nav/AppNavigator';
+import AdminNavigator from './components/nav/AdminNavigator';
+import AuthNavigator from './components/nav/AuthNavigator';
 
-export default function App() {
+function RootNavigator() {
+  const [state, setState] = useContext(AuthContext);
+
+  const authenticated =
+    state && state.user !== null && state.token !== '' && state.token !== null;
+
+  if (!authenticated) {
+    return <AuthNavigator />;
+  }
+
+  if (!state.user.active) {
+    return <AuthNavigator />;
+  }
+
+  if (state.user.role === 'doctor') {
+    return <AdminNavigator />;
+  }
+
+  return <AppNavigator />;
+}
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <AuthProvider>
+      <NavigationContainer>
+        <RootNavigator />
+      </NavigationContainer>
+    </AuthProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
