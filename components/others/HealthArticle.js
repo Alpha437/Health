@@ -10,7 +10,7 @@ const HealthArticle = ({}) => {
         flex: 1,
         flexDirection: 'column',
         rowGap: 10,
-        width: 80,
+        width: 360,
         backgroundColor: '#ff7900',
         padding: 15,
         borderRadius: 10,

@@ -7,7 +7,7 @@ import VerifyEmail from '../../screens/VerifyEmail';
 import Appointments from '../../screens/Appointments';
 import Search from '../../screens/Search';
 import HeaderTabs from './HeaderTab';
-import Account from '../../screens/user/Account';
+import Menu from '../../screens/user/Menu';
 import CallScreen from '../../screens/user/CallScreen';
 
 const Stack = createNativeStackNavigator();
@@ -28,35 +28,35 @@ export default function AppNavigator() {
         }}
       />
       <Stack.Screen
-        name='Account'
-        component={Account}
+        name='Menu'
+        component={Menu}
         options={{
-          headerBackVisible: true,
+          headerShown: false,
         }}
       />
       <Stack.Screen
         name='Appointments'
         component={Appointments}
         options={{
-          headerBackVisible: true,
+          headerShown: false,
         }}
       />
       <Stack.Screen
         name='Search'
         component={Search}
         options={{
-          headerBackVisible: true,
+          headerShown: false,
         }}
       />
       <Stack.Screen
         name='UpdateInfo'
         component={UpdateInfo}
-        options={{ headerShown: false, headerBackVisible: true }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name='Call'
         component={CallScreen}
-        options={{ headerShown: false, headerBackVisible: true }}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

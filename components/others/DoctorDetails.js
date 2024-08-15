@@ -11,7 +11,7 @@ const DoctorDetails = ({}) => {
         flexDirection: 'column',
         rowGap: 10,
         shadowColor: '#333',
-        width: 200,
+        width: 360,
         backgroundColor: 'white',
         elevation: 5,
         padding: 15,
@@ -58,18 +58,26 @@ const DoctorDetails = ({}) => {
           flex: 1,
           padding: 10,
           flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
         }}
       >
-        <FontAwesome5Icon name='clock' size={15} color='#ff6d00' />
-        <Text bold color='#30005e' style={{ marginLeft: 10 }}>
-          Monday
-        </Text>
-        <Text color='#30005e' style={{ marginLeft: 10 }}>
-          Oct 24, 2022
-        </Text>
-        <Text color='#30005e' style={{ marginLeft: 60 }}>
-          9:00 - 9:30am
-        </Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <FontAwesome5Icon name='calendar' size={20} color='#ff6d00' />
+          <Text bold color='#30005e' style={{ marginLeft: 10 }}>
+            Monday
+          </Text>
+          <Text color='#30005e' style={{ marginLeft: 10 }}>
+            Oct 24, 2022
+          </Text>
+        </View>
+
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <FontAwesome5Icon name='clock' size={20} color='#ff6d00' />
+          <Text color='#30005e' style={{ marginLeft: 10 }}>
+            9:00 - 9:30am
+          </Text>
+        </View>
       </View>
 
       {/* Book Appointment */}

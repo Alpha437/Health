@@ -5,13 +5,13 @@ import { AuthContext } from '../../context/auth';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+const signOut = async () => {
+  setState({ token: '', user: null });
+  await AsyncStorage.removeItem('@auth');
+};
+
 const HeaderTabs = () => {
   const [state, setState] = useContext(AuthContext);
-
-  const signOut = async () => {
-    setState({ token: '', user: null });
-    await AsyncStorage.removeItem('@auth');
-  };
 
   return (
     <SafeAreaView>

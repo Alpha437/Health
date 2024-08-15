@@ -4,7 +4,7 @@ import HomeScreen from '../../screens/admin/HomeScreen';
 import UpdateInfo from '../../screens/UpdateInfo';
 import Search from '../../screens/Search';
 import HeaderTabs from './HeaderTab';
-import Account from '../../screens/admin/Account';
+import Menu from '../../screens/admin/Menu';
 import Appointments from '../../screens/Appointments';
 import CallScreen from '../../screens/admin/CallScreen';
 
@@ -25,10 +25,10 @@ export default function AdminNavigator() {
         }}
       />
       <Stack.Screen
-        name='Account'
-        component={Account}
+        name='Menu'
+        component={Menu}
         options={{
-          headerBackVisible: true,
+          headerShown: false,
         }}
       />
       <Stack.Screen

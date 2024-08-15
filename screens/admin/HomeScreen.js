@@ -4,8 +4,8 @@ import Text from '@kaloraat/react-native-text';
 import { AuthContext } from '../../context/auth';
 import FooterTabs from '../../components/nav/FooterTabs';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
-import DoctorDetails from '../../components/dashboard/DoctorDetails';
-import HealthArticle from '../../components/dashboard/HealthArticle';
+import DoctorDetails from '../../components/others/DoctorDetails';
+import HealthArticle from '../../components/others/HealthArticle';
 import axios from 'axios';
 
 export default function HomeScreen({ navigation }) {
@@ -176,7 +176,6 @@ export default function HomeScreen({ navigation }) {
           </View>
           <ScrollView
             horizontal={true}
-            showsHorizontalScrollIndicator={true}
             contentContainerStyle={{
               flexGrow: 1,
               padding: 10,
@@ -210,7 +209,6 @@ export default function HomeScreen({ navigation }) {
           </View>
           <ScrollView
             horizontal={true}
-            showsHorizontalScrollIndicator={true}
             contentContainerStyle={{
               flexGrow: 1,
               padding: 10,
@@ -311,7 +309,7 @@ export default function HomeScreen({ navigation }) {
         </View>
       </ScrollView>
 
-      <FooterTabs />
+      <FooterTabs backgroundColor='#ff7900' />
     </View>
   );
 }

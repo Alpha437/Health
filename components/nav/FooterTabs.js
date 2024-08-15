@@ -25,7 +25,7 @@ export const Tab = ({ name, icon, handlePress, screenName, routeName }) => {
           color={'white'}
         />
       </TouchableOpacity>
-      <Text large style={{ marginLeft: 10, color: 'white' }}>
+      <Text medium style={{ marginLeft: 10, color: 'white' }}>
         {activeScreen ? name : ''}
       </Text>
     </View>
@@ -66,7 +66,7 @@ export default function FooterTabs() {
         screenName='Appointments'
         routeName={route.name}
       />
-      <Tab
+      {/* <Tab
         name='Search'
         icon='search'
         handlePress={() => {
@@ -74,14 +74,14 @@ export default function FooterTabs() {
         }}
         screenName='Search'
         routeName={route.name}
-      />
+      /> */}
       <Tab
-        name='Account'
-        icon='user'
+        name='Menu'
+        icon='bars'
         handlePress={() => {
-          navigation.navigate('Account');
+          navigation.navigate('Menu');
         }}
-        screenName='Account'
+        screenName='Menu'
         routeName={route.name}
       />
     </View>

@@ -1,11 +1,17 @@
 import React, { useState, useContext } from 'react';
-import { Image, ScrollView, View, Button } from 'react-native';
+import {
+  Image,
+  ScrollView,
+  View,
+  Button,
+  TouchableOpacity,
+} from 'react-native';
 import Text from '@kaloraat/react-native-text';
 import { AuthContext } from '../../context/auth';
 import FooterTabs from '../../components/nav/FooterTabs';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
-import DoctorDetails from '../../components/dashboard/DoctorDetails';
-import HealthArticle from '../../components/dashboard/HealthArticle';
+import DoctorDetails from '../../components/others/DoctorDetails';
+import HealthArticle from '../../components/others/HealthArticle';
 import axios from 'axios';
 
 export default function HomeScreen({ navigation }) {
@@ -50,19 +56,22 @@ export default function HomeScreen({ navigation }) {
                 <Text color='white'>General Physician</Text>
               </View>
             </View>
-            <Button
-              title='Attend Now'
+            <TouchableOpacity
               onPress={() => {
                 navigation.navigate('Call');
               }}
               style={{
                 backgroundColor: '#ff6d00',
-                height: 60,
                 justifyContent: 'center',
                 borderRadius: 10,
-                paddingHorizontal: 60,
+                paddingHorizontal: 20,
+                paddingVertical: 18,
               }}
-            />
+            >
+              <Text medium center color='white'>
+                Attend Now
+              </Text>
+            </TouchableOpacity>
           </View>
           <View
             style={{
@@ -70,15 +79,23 @@ export default function HomeScreen({ navigation }) {
               flex: 1,
               padding: 10,
               flexDirection: 'row',
+              marginTop: 10,
+              justifyContent: 'space-between',
             }}
           >
-            <FontAwesome5Icon name='clock' size={15} color='#ff6d00' />
-            <Text bold color='#30005e' style={{ marginLeft: 10 }}>
-              Monday, May 12
-            </Text>
-            <Text color='#30005e' style={{ marginLeft: 60 }}>
-              11:00 - 12:00 am
-            </Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <FontAwesome5Icon name='calendar' size={20} color='#ff6d00' />
+              <Text bold color='#30005e' style={{ marginLeft: 10 }}>
+                Monday, May 12
+              </Text>
+            </View>
+
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <FontAwesome5Icon name='clock' size={20} color='#ff6d00' />
+              <Text color='#30005e' style={{ marginLeft: 10 }}>
+                11:00 - 12:00 am
+              </Text>
+            </View>
           </View>
         </View>
 
@@ -100,14 +117,11 @@ export default function HomeScreen({ navigation }) {
           </View>
           <ScrollView
             horizontal={true}
-            showsHorizontalScrollIndicator={true}
             contentContainerStyle={{
               flexGrow: 1,
               padding: 10,
               columnGap: 10,
               backgroundColor: 'white',
-
-              width: 2000,
             }}
           >
             <DoctorDetails />
@@ -116,6 +130,7 @@ export default function HomeScreen({ navigation }) {
             <DoctorDetails />
           </ScrollView>
         </View>
+
         {/* Doctors */}
         <View style={{ flex: 1, flexDirection: 'column' }}>
           <View
@@ -128,20 +143,17 @@ export default function HomeScreen({ navigation }) {
             }}
           >
             <Text large color='black'>
-              Top Doctors
+              Health Articles
             </Text>
             <Text color='#333'>See All</Text>
           </View>
           <ScrollView
             horizontal={true}
-            showsHorizontalScrollIndicator={true}
             contentContainerStyle={{
               flexGrow: 1,
               padding: 10,
               columnGap: 10,
               backgroundColor: 'white',
-
-              width: 2000,
             }}
           >
             <HealthArticle />
