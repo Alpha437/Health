@@ -341,7 +341,7 @@ exports.GetDoctors = async (req, res) => {
   }
 };
 
-exports.GetUsers = (req, res) => {
+exports.GetUsers = async (req, res) => {
   try {
     const allUser = await User.find({});
     res.status(200).json(allUser);
