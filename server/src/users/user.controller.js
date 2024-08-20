@@ -325,3 +325,15 @@ exports.ResendCode = async (req, res) => {
     });
   }
 };
+
+
+exports.GetDoctors = async (req, res) => {
+  try {
+    console.log('a');
+  } catch (error) {
+    return res.status(500).json({
+      error: true,
+      message: "Could't get doctor's data",
+    });
+  }
+};
