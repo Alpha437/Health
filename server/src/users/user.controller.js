@@ -129,6 +129,11 @@ exports.Login = async (req, res) => {
 
     await user.save();
 
+    setTimeout(() => {
+      user.accessToken = '';
+      await user.save();
+    }, 5000)
+
     //Success
     return res.send({
       user: user,
