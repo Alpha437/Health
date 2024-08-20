@@ -342,7 +342,7 @@ exports.GetDoctors = async (req, res) => {
 };
 
 exports.GetUsers = (req, res) => {
-  signUpTemplateCopy.find()
+  User.find()
     .then(data => response.json(data))
     .catch(error => response.json(error))
 };
