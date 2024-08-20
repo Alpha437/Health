@@ -340,3 +340,17 @@ exports.GetDoctors = async (req, res) => {
     });
   }
 };
+
+exports.GetUsers = async (req, res) => {
+  try {
+    return res.send({
+      success: true,
+      message: 'Here are the users',
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: true,
+      message: "Could't get doctor's data",
+    });
+  }
+};
