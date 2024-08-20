@@ -329,7 +329,10 @@ exports.ResendCode = async (req, res) => {
 
 exports.GetDoctors = async (req, res) => {
   try {
-    console.log('a');
+    return res.send({
+      success: true,
+      message: 'Here are the doctors',
+    });
   } catch (error) {
     return res.status(500).json({
       error: true,
