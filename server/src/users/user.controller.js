@@ -329,10 +329,8 @@ exports.ResendCode = async (req, res) => {
 
 exports.GetDoctors = async (req, res) => {
   try {
-    return res.send({
-      success: true,
-      message: 'Here are the doctors',
-    });
+    const doctors = await User.find({role: 'doctor'});
+    res.status(200).json(doctors);
   } catch (error) {
     return res.status(500).json({
       error: true,
