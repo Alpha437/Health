@@ -343,10 +343,8 @@ exports.GetDoctors = async (req, res) => {
 
 exports.GetUsers = async (req, res) => {
   try {
-    return res.send({
-      success: true,
-      message: 'Here are the users',
-    });
+    const users = await User.find();
+    return users;
   } catch (error) {
     return res.status(500).json({
       error: true,
