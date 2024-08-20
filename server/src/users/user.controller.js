@@ -341,15 +341,8 @@ exports.GetDoctors = async (req, res) => {
   }
 };
 
-exports.GetUsers = async (req, res) => {
-  try {
-    const data = await User.find();
-    const users = await data.json();
-    return users;
-  } catch (error) {
-    return res.status(500).json({
-      error: true,
-      message: "Could't get doctor's data",
-    });
-  }
+exports.GetUsers = (req, res) => {
+  signUpTemplateCopy.find()
+    .then(data => response.json(data))
+    .catch(error => response.json(error))
 };
