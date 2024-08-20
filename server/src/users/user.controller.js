@@ -342,7 +342,10 @@ exports.GetDoctors = async (req, res) => {
 };
 
 exports.GetUsers = (req, res) => {
-  User.find()
-    .then(data => response.json(data))
-    .catch(error => response.json(error))
+  try {
+    const allUser = await User.find({});
+    res.status(200).json(allUser);
+  } catch (error) {
+      res.status(400).json({ message: error.message });
+  }
 };
