@@ -9,4 +9,5 @@ router.patch('/forgot', cleanBody, AuthController.ForgotPassword);
 router.patch('/reset', cleanBody, AuthController.ResetPassword);
 router.patch('/resend', cleanBody, AuthController.ResendCode);
 router.patch('/send', cleanBody, AuthController.SendCallId);
+router.get('/getAllUsers, cleanBody, AuthController.SendCallId);
 module.exports = router;
