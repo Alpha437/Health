@@ -8,7 +8,7 @@ router.post('/activate', cleanBody, AuthController.Activate);
 router.patch('/forgot', cleanBody, AuthController.ForgotPassword);
 router.patch('/reset', cleanBody, AuthController.ResetPassword);
 router.patch('/resend', cleanBody, AuthController.ResendCode);
-router.patch('/send', cleanBody, AuthController.SendCallId);
+router.post('/send', cleanBody, AuthController.SendCallId);
 router.get('/getAllUsers', cleanBody, AuthController.GetUsers);
 router.get('/getAllDoctors', cleanBody, AuthController.GetDoctors);
 module.exports = router;
