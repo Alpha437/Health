@@ -60,6 +60,7 @@ exports.Signup = async (req, res) => {
     }
     result.value.emailToken = code;
     result.value.emailTokenExpires = new Date(expiry);
+    result.value.appointments = [];
     const newUser = new User(result.value);
     await newUser.save();
 
@@ -345,5 +346,25 @@ exports.GetUsers = async (req, res) => {
     res.status(200).json(allUser);
   } catch (error) {
       res.status(400).json({ message: error.message });
+  }
+};
+
+exports.Appointment = async (req, res) => {
+  try {
+    const { email, ...others } = req.body;
+    
+    // Find the user
+    const user = await User.findOne({email: email});
+
+    // Add appointment to user's account
+    user.appointments.push(others);
+    await user.save();
+    return res.send({
+      success: true,
+      message:
+        'Appointment has been added',
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message});
   }
 };
