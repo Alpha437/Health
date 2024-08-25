@@ -352,13 +352,20 @@ exports.GetUsers = async (req, res) => {
 exports.Appointment = async (req, res) => {
   try {
     const { email, ...others } = req.body;
+    others.status = 'pending';
     
-    // Find the user
+    // Find the patient and doctor
     const user = await User.findOne({email: email});
+    const patient = await User.findOne({name: req.body.patient});
 
-    // Add appointment to user's account
+    // Add appointment to patient's and doctor's account
+    const appointmentData = {doctor: user.name, ...others};
+    delete appointmentData.patient;
+    patient.appointments.push(appointmentData);
     user.appointments.push(others);
+    
     await user.save();
+    await patient.save();
     return res.send({
       success: true,
       message:
