@@ -14,6 +14,7 @@ export const Tab = ({ name, icon, handlePress, screenName, routeName }) => {
         alignItems: 'center',
         backgroundColor: backgroundColor,
         padding: 10,
+        paddingRight: 20,
         borderRadius: 10,
       }}
     >

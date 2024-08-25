@@ -10,26 +10,30 @@ const UserInput = ({
   keyboardType = 'default',
   secureTextEntry = false,
   placeholder = '',
-}) => (
-  <View style={{}}>
-    <Text bold>{name}</Text>
-    <TextInput
-      placeholder={placeholder}
-      placeholderTextColor={'#333'}
-      autoCorrect={false}
-      autoCapitalize={autoCapitalize}
-      keyboardType={keyboardType}
-      secureTextEntry={secureTextEntry}
-      style={{
-        borderBottomWidth: 0.5,
-        height: 48,
-        borderBottomColor: '#333',
-        marginBottom: 30,
-      }}
-      value={value}
-      onChangeText={(text) => setValue(text)}
-    />
-  </View>
-);
-
+  style = [],
+}) => {
+  return (
+    <View style={{ ...style }}>
+      <Text bold>{name}</Text>
+      <TextInput
+        placeholder={placeholder}
+        placeholderTextColor={'#333'}
+        autoCorrect={false}
+        autoCapitalize={autoCapitalize}
+        keyboardType={keyboardType}
+        secureTextEntry={secureTextEntry}
+        style={{
+          borderBottomWidth: 0.5,
+          height: 48,
+          borderBottomColor: '#333',
+          marginBottom: 30,
+        }}
+        value={value}
+        onChangeText={(text) => {
+          setValue(text);
+        }}
+      />
+    </View>
+  );
+};
 export default UserInput;

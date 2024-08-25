@@ -9,9 +9,9 @@ import {
 
 export default function CallScreen({ navigation }) {
   const apiKey = 'm98eeerxerwb';
-  const userId = 'Medicare_Project';
+  const userId = 'doctor';
   const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiTWVkaWNhcmVfUHJvamVjdCJ9.OR2k_VVs4qbQlmzsjpHKHnDMEu9fpANgweana_JK8lM';
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZG9jdG9yIn0.8y2sQOFhDZKNJrSVgnpf2JZ6ZZlS5A9_LHFpT92q4ZI';
   const callId = 'wV5zScZEXPkj';
   const user = { id: userId };
 

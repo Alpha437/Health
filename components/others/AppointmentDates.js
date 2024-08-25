@@ -32,13 +32,21 @@ export const AppointmentCard = ({
   title,
   color,
   bgColor,
-  btnDisplay = 'none',
+  btnDisplay1 = 'none',
+  btnDisplay2 = 'none',
   btnColor,
-  btnText,
-  btnTextColor,
+  btnText1,
+  btnText2,
+  btnTextColor1,
+  btnTextColor2,
   btnBorderWidth = 0,
-  btnBgColor = 'white',
+  btnBgColor1 = 'white',
+  btnBgColor2 = 'white',
+  width = '100%',
 }) => {
+  if (btnDisplay2 === 'flex') {
+    width = '45%';
+  }
   return (
     <View
       style={{
@@ -74,20 +82,39 @@ export const AppointmentCard = ({
         </View>
       </View>
 
-      <TouchableOpacity
-        style={{
-          backgroundColor: btnBgColor,
-          borderColor: btnColor,
-          borderWidth: btnBorderWidth,
-          borderRadius: 10,
-          display: btnDisplay,
-          padding: 15,
-        }}
-      >
-        <Text center medium color={btnTextColor}>
-          {btnText}
-        </Text>
-      </TouchableOpacity>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        <TouchableOpacity
+          style={{
+            backgroundColor: btnBgColor1,
+            borderColor: btnColor,
+            borderWidth: btnBorderWidth,
+            borderRadius: 10,
+            display: btnDisplay1,
+            padding: 15,
+            width: width,
+          }}
+        >
+          <Text center medium color={btnTextColor1}>
+            {btnText1}
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={{
+            backgroundColor: btnBgColor2,
+            borderColor: btnColor,
+            borderWidth: btnBorderWidth,
+            borderRadius: 10,
+            display: btnDisplay2,
+            padding: 15,
+            width: width,
+          }}
+        >
+          <Text center medium color={btnTextColor2}>
+            {btnText2}
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

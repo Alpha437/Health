@@ -1,10 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
   Image,
   ScrollView,
   View,
-  Button,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import Text from '@kaloraat/react-native-text';
 import { AuthContext } from '../../context/auth';
@@ -16,15 +16,52 @@ import axios from 'axios';
 
 export default function HomeScreen({ navigation }) {
   const [state, setState] = useContext(AuthContext);
-  const [loading, setLoading] = useState('');
+  const [loading, setLoading] = useState(true);
   const [callId, setCallId] = useState('');
+  const [doctors, setDoctors] = useState('');
+
+  async function getDoctors() {
+    try {
+      const { data } = await axios.get('/getAllDoctors');
+      setDoctors(data);
+      setLoading(false);
+    } catch (error) {
+      if (error) {
+        console.log('Could not get doctors.');
+      }
+    }
+  }
+
+  useEffect(() => {
+    getDoctors();
+  }, []);
+
+  // function genRandomString(number) {
+  //   const chars =
+  //     'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  //   const charLength = chars.length;
+  //   let result = '';
+  //   for (let i = 0; i < length; i++) {
+  //     result += chars.charAt(Math.floor(Math.random() * charLength));
+  //   }
+  //   return result;
+  // }
+
+  // function handlePress() {
+  //   const id = genRandomString(5);
+  //   setCallId(id);
+  //   console.log('CALL ID => ', callId);
+  //   console.log(this);
+  // }
+
   return (
     <View style={{ flex: 1 }}>
-      <ScrollView contentContainerStyle={{ backgroundColor: '#240046' }}>
+      <ScrollView contentContainerStyle={{ backgroundColor: '#fff' }}>
         <View
           style={{
             paddingVertical: 30,
             paddingHorizontal: 10,
+            backgroundColor: '#240046',
           }}
         >
           <Text title color='white'>
@@ -124,12 +161,35 @@ export default function HomeScreen({ navigation }) {
               backgroundColor: 'white',
             }}
           >
+            {loading ? (
+              <ActivityIndicator
+                size='large'
+                color='#333'
+                style={{ flex: 1 }}
+              />
+            ) : (
+              doctors.map(function (doctor) {
+                return <DoctorDetails doctor={doctor} />;
+              })
+            )}
+
+            {/* <DoctorDetails doctor={doctors[0]} /> */}
+            {/* <DoctorDetails />
             <DoctorDetails />
             <DoctorDetails />
-            <DoctorDetails />
-            <DoctorDetails />
+            <DoctorDetails /> */}
           </ScrollView>
         </View>
+
+        {/* Download Prescription */}
+        <TouchableOpacity
+          style={{ flex: 1, padding: 10, backgroundColor: 'white' }}
+        >
+          <Image
+            source={require('../../images/prescriptions.png')}
+            style={{ width: '100%' }}
+          />
+        </TouchableOpacity>
 
         {/* Doctors */}
         <View style={{ flex: 1, flexDirection: 'column' }}>
@@ -193,7 +253,7 @@ export default function HomeScreen({ navigation }) {
                 color='#30005e'
                 style={{ flex: 1, flexWrap: 'wrap', marginLeft: 20 }}
               >
-                Search for doctors by speciality, service or disease.
+                Search for doctors by speciality, service or disease
               </Text>
             </View>
             <View
@@ -218,7 +278,7 @@ export default function HomeScreen({ navigation }) {
                 color='#30005e'
                 style={{ flex: 1, flexWrap: 'wrap', marginLeft: 20 }}
               >
-                Search for doctors by speciality, service or disease.
+                Book and confirmed appointment within seconds
               </Text>
             </View>
             <View
@@ -243,7 +303,7 @@ export default function HomeScreen({ navigation }) {
                 color='#30005e'
                 style={{ flex: 1, flexWrap: 'wrap', marginLeft: 20 }}
               >
-                Search for doctors by speciality, service or disease.
+                Select based on experience, fee or rating.
               </Text>
             </View>
           </View>

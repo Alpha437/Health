@@ -1,9 +1,13 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
 import Text from '@kaloraat/react-native-text';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
+import genRandomString from '../call/RandomString';
 
-const DoctorDetails = ({}) => {
+const DoctorDetails = ({ width = 360, handlePress, doctor, patientName }) => {
+  const { name, email } = doctor;
+
+  const id = genRandomString(5);
   return (
     <View
       style={{
@@ -11,7 +15,7 @@ const DoctorDetails = ({}) => {
         flexDirection: 'column',
         rowGap: 10,
         shadowColor: '#333',
-        width: 360,
+        width: width,
         backgroundColor: 'white',
         elevation: 5,
         padding: 15,
@@ -45,7 +49,7 @@ const DoctorDetails = ({}) => {
             </Text>
           </View>
           <Text bold medium color='#30005e'>
-            Dr. Abram George
+            Dr. {doctor ? name : 'Abram George'}
           </Text>
           <Text color='#333'>General Physician</Text>
         </View>
@@ -81,28 +85,35 @@ const DoctorDetails = ({}) => {
       </View>
 
       {/* Book Appointment */}
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <Text bold medium color='#30005e'>
-          $100
+      <TouchableOpacity
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          marginLeft: 50,
+          width: '90%',
+        }}
+        onPress={async () => {
+          let date, time;
+          let genDate = function () {
+            date = new Date.now();
+            time = date.toLocaleTimeString();
+            date = date.toLocaleDateString();
+          };
+          genDate();
+          await axios.post('/book', {
+            email,
+            patient: patientName,
+            callId: id,
+            date: date,
+            time: time,
+          });
+        }}
+      >
+        <FontAwesome5Icon name='calendar' size={20} color='#ff6d00' />
+        <Text style={{ marginLeft: 10 }} medium color='#ff6d00'>
+          Book Appointment
         </Text>
-        <View
-          style={{
-            width: 2,
-            height: 20,
-            backgroundColor: '#333',
-            marginLeft: 20,
-            opacity: 0.2,
-          }}
-        ></View>
-        <View
-          style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 50 }}
-        >
-          <FontAwesome5Icon name='calendar' size={20} color='#ff6d00' />
-          <Text style={{ marginLeft: 10 }} medium color='#ff6d00'>
-            Book Appointment
-          </Text>
-        </View>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };

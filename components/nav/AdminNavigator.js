@@ -5,7 +5,7 @@ import UpdateInfo from '../../screens/UpdateInfo';
 import Search from '../../screens/Search';
 import HeaderTabs from './HeaderTab';
 import Menu from '../../screens/admin/Menu';
-import Appointments from '../../screens/Appointments';
+import Appointments from '../../screens/admin/Appointments';
 import CallScreen from '../../screens/admin/CallScreen';
 
 const Stack = createNativeStackNavigator();

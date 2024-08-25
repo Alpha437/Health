@@ -44,7 +44,7 @@ const HealthArticle = ({}) => {
           justifyContent: 'space-between',
         }}
       >
-        <Text color='#fff'>
+        <Text color='#fff' style={{ flex: 1 }}>
           Official public service announcement on coronavirus from the world
         </Text>
 

@@ -2,11 +2,11 @@ import React from 'react';
 import { ScrollView, View } from 'react-native';
 import Text from '@kaloraat/react-native-text';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import FooterTabs from '../components/nav/FooterTabs';
+import FooterTabs from '../../components/nav/FooterTabs';
 import {
   AppointmentCard,
   AppointmentDates,
-} from '../components/others/AppointmentDates';
+} from '../../components/others/AppointmentDates';
 
 export default function Appointments() {
   return (
@@ -68,7 +68,7 @@ export default function Appointments() {
               style={{
                 paddingVertical: 5,
                 paddingHorizontal: 10,
-                backgroundcolor: '#ffe2b3',
+                backgroundcolor: '#ffe3af',
               }}
             >
               <Text bold color='#ff7900'>
@@ -87,28 +87,42 @@ export default function Appointments() {
           </View>
         </View>
 
-        <View style={{ rowGap: 10 }}>
-          <AppointmentCard
-            color='#ff7900'
-            bgColor='#ffe2b3'
-            title={'Upcoming'}
-            btnDisplay='flex'
-            btnText={'Attend Now'}
-            btnTextColor={'white'}
-            btnBgColor={'#ff7900'}
-          />
+        <ScrollView contentContainerStyle={{ rowGap: 10, padding: 5 }}>
           <AppointmentCard
             color='#0db00a'
             bgColor='#e2f8e3'
             title={'Completed'}
-            btnDisplay='flex'
-            btnText={'View Details'}
-            btnTextColor={'#ff7900'}
+            btnDisplay1='flex'
+            btnText1={'View Details'}
+            btnTextColor1={'#240046'}
             btnBorderWidth={2}
-            btnColor={'#ff7900'}
+            btnColor={'#240046'}
+          />
+
+          <AppointmentCard
+            color='#ff7900'
+            bgColor='#ffe2b3'
+            title={'Upcoming'}
+            btnDisplay1='flex'
+            btnText1={'Attend Now'}
+            btnTextColor1={'white'}
+            btnBgColor1={'#240046'}
+          />
+          <AppointmentCard
+            color='#b985ff'
+            bgColor='#f3eaff'
+            title={'Pending'}
+            btnDisplay1='flex'
+            btnDisplay2='flex'
+            btnText1={'Decline'}
+            btnText2={'Accept'}
+            btnTextColor1={'red'}
+            btnBgColor1={'#ffeae5'}
+            btnTextColor2={'#0db00a'}
+            btnBgColor2={'#e2f8e3'}
           />
           <AppointmentCard color='red' bgColor='#ffeae5' title={'Canceled'} />
-        </View>
+        </ScrollView>
       </ScrollView>
 
       <FooterTabs />

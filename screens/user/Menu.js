@@ -4,7 +4,7 @@ import Text from '@kaloraat/react-native-text';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import FooterTabs from '../../components/nav/FooterTabs';
 import { AuthContext } from '../../context/auth';
-import { MenuTab } from '../../components/Others/MenuTab';
+import { MenuTab } from '../../components/others/MenuTab';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 

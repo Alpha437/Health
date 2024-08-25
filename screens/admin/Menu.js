@@ -4,7 +4,7 @@ import Text from '@kaloraat/react-native-text';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import FooterTabs from '../../components/nav/FooterTabs';
 import { AuthContext } from '../../context/auth';
-import { MenuTab } from '../../components/Others/MenuTab';
+import { MenuTab } from '../../components/others/MenuTab';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -17,15 +17,13 @@ export default function Menu() {
       style={{
         flex: 1,
         backgroundColor: 'white',
-        paddingHorizontal: 10,
         paddingTop: 20,
       }}
     >
-      <Text title color='#240046'>
-        Menu
-      </Text>
-
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, paddingHorizontal: 10 }}>
+        <Text title color='#240046'>
+          Menu
+        </Text>
         <View
           style={{
             flexDirection: 'row',
