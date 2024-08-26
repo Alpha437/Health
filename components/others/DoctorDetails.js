@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Image, TouchableOpacity } from 'react-native';
 import Text from '@kaloraat/react-native-text';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import genRandomString from '../call/RandomString';
 
 const DoctorDetails = ({ width = 360, handlePress, doctor, patientName }) => {
+  const [loading, setLoading] = useState(false);
   const { name, email } = doctor;
 
   const id = genRandomString(5);
@@ -107,11 +108,12 @@ const DoctorDetails = ({ width = 360, handlePress, doctor, patientName }) => {
             date: date,
             time: time,
           });
+          setLoading(false);
         }}
       >
         <FontAwesome5Icon name='calendar' size={20} color='#ff6d00' />
         <Text style={{ marginLeft: 10 }} medium color='#ff6d00'>
-          Book Appointment
+          {loading ? 'Please wait...' : 'Book Appointment'}
         </Text>
       </TouchableOpacity>
     </View>

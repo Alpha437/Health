@@ -36,24 +36,6 @@ export default function HomeScreen({ navigation }) {
     getDoctors();
   }, []);
 
-  // function genRandomString(number) {
-  //   const chars =
-  //     'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  //   const charLength = chars.length;
-  //   let result = '';
-  //   for (let i = 0; i < length; i++) {
-  //     result += chars.charAt(Math.floor(Math.random() * charLength));
-  //   }
-  //   return result;
-  // }
-
-  // function handlePress() {
-  //   const id = genRandomString(5);
-  //   setCallId(id);
-  //   console.log('CALL ID => ', callId);
-  //   console.log(this);
-  // }
-
   return (
     <View style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ backgroundColor: '#fff' }}>
@@ -168,16 +150,8 @@ export default function HomeScreen({ navigation }) {
                 style={{ flex: 1 }}
               />
             ) : (
-              doctors.map(function (doctor) {
-                return <DoctorDetails doctor={doctor} />;
-              })
+              doctors.map((doctor) => <DoctorDetails doctor={doctor} />)
             )}
-
-            {/* <DoctorDetails doctor={doctors[0]} /> */}
-            {/* <DoctorDetails />
-            <DoctorDetails />
-            <DoctorDetails />
-            <DoctorDetails /> */}
           </ScrollView>
         </View>
 
