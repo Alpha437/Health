@@ -132,7 +132,10 @@ export default function Appointments() {
               }
             })
           ) : (
-            <ActivityIndicator />
+            <Text large center>
+              {' '}
+              You have no appointments.{' '}
+            </Text>
           )}
 
           <AppointmentCard
