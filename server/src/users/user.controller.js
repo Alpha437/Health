@@ -352,22 +352,18 @@ exports.GetUsers = async (req, res) => {
 exports.Appointment = async (req, res) => {
   try {
     const { email, ...others } = req.body;
-    others.status = 'pending';
     
     // Find the patient and doctor
-    const user = await User.findOne({email: email});
-    const patient = await User.findOne({name: req.body.patient});
-
-    // Add appointment to patient's and doctor's account
-    const appointmentData = {doctor: 'Dr. ' + user.name, ...others};
+    const user = await User.findOneAndUpdate(
+      {email: email},
+            { $push: { appointments: others } },
+            { new: true } 
+        );
+    const appointmentData = { doctor: 'Dr. ' + user.name, ...others};
     delete appointmentData.patient;
+    const patient = await User.findOneAndUpdate({name: req.body.patient}, { $push: { appointments: appointmentData } },
+            { new: true });
     
-    patient.appointments.push(appointmentData);
-    user.appointments.push(others);
-    user.hello = 'HEllo';
-    
-    await user.save();
-    await patient.save();
     return res.send({
       users: {user, patient},
       success: true,
