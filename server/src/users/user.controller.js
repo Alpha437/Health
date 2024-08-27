@@ -367,6 +367,7 @@ exports.Appointment = async (req, res) => {
     await user.save();
     await patient.save();
     return res.send({
+      users: { patient.appointments, user.appointments },
       success: true,
       message:
         'Appointment has been added',
