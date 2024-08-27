@@ -45,7 +45,7 @@ const Signin = ({ navigation }) => {
 
         setLoading(false);
         console.log('SIGN IN SUCCESS =>', data);
-        alert('Sign in successful');
+        // alert('Sign in successful');
 
         // redirect
         navigation.navigate('Home');

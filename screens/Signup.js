@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { View } from 'react-native';
+import { Alert, View } from 'react-native';
 import Text from '@kaloraat/react-native-text';
 import UserInput from '../components/auth/UserInput.js';
 import SubmitButton from '../components/auth/SubmitButton.js';
@@ -48,11 +48,13 @@ const Signup = ({ navigation }) => {
         console.log(state);
         //save response in async storage
         await AsyncStorage.setItem('@auth', JSON.stringify(data));
-        console.log(data);
 
         setLoading(false);
         console.log('SIGN UP SUCCESS =>', data);
-        alert('Sign up successful');
+        Alert.alert(
+          'Success',
+          'Your account has been successfully created.\\n Enter the email verification code sent to your email to verify your account.'
+        );
 
         // redirect
         navigation.navigate('VerifyEmail');
