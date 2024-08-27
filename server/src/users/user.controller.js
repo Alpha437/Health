@@ -361,8 +361,10 @@ exports.Appointment = async (req, res) => {
     // Add appointment to patient's and doctor's account
     const appointmentData = {doctor: 'Dr. ' + user.name, ...others};
     delete appointmentData.patient;
+    
     patient.appointments.push(appointmentData);
     user.appointments.push(others);
+    user.hello = 'HEllo';
     
     await user.save();
     await patient.save();
