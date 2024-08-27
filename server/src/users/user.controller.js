@@ -364,8 +364,8 @@ exports.Appointment = async (req, res) => {
     patient.appointments.push(appointmentData);
     user.appointments.push(others);
     
-    await user.save(() => console.log('Saved'));
-    await patient.save(() => console.log('Saved'));
+    await user.save();
+    await patient.save();
     return res.send({
       users: {user, patient},
       success: true,
