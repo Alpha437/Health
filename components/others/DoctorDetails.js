@@ -105,10 +105,11 @@ const DoctorDetails = ({
         onPress={async () => {
           try {
             setLoading(true);
-            await axios.post('/book', {
+            await axios.put('/book', {
               email,
               patient: patientName,
               callId: id,
+              status: 'pending',
             });
             setLoading(false);
             Alert.alert(

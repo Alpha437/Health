@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { View } from 'react-native';
+import { View, Alert } from 'react-native';
 import Text from '@kaloraat/react-native-text';
 import UserInput from '../components/auth/UserInput.js';
 import SubmitButton from '../components/auth/SubmitButton.js';
@@ -51,7 +51,8 @@ const Signin = ({ navigation }) => {
         navigation.navigate('Home');
       }
     } catch (err) {
-      console.log(err);
+      const { data } = err.response;
+      Alert.alert('Error', data.message);
       setLoading(false);
     }
   };
