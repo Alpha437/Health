@@ -349,6 +349,15 @@ exports.GetUsers = async (req, res) => {
   }
 };
 
+exports.GetUser = async (req, res) => {
+  try {
+    const user = await User.findOne({email: email});
+    res.status(200).json(user);
+  } catch (error) {
+      res.status(400).json({ message: error.message });
+  }
+};
+
 exports.Appointment = async (req, res) => {
   try {
     const { email, ...others } = req.body;
