@@ -351,7 +351,7 @@ exports.GetUsers = async (req, res) => {
 
 exports.GetUser = async (req, res) => {
         const { secret } = req.params;
-        const user = await UserSchema.findOne({ secret });
+        const user = await UserSchema.findOne({ email: secret });
         if (user) {
             return res.send({ error: false, message: 'User found', data: user });
         }
