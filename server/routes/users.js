@@ -5,7 +5,7 @@ const AuthController = require('../src/users/user.controller');
 router.post('/signup', cleanBody, AuthController.Signup);
 router.post('/login', cleanBody, AuthController.Login);
 router.post('/activate', cleanBody, AuthController.Activate);
-router.post('/book', cleanBody, AuthController.Appointment);
+router.put('/book', cleanBody, AuthController.Appointment);
 router.patch('/forgot', cleanBody, AuthController.ForgotPassword);
 router.patch('/reset', cleanBody, AuthController.ResetPassword);
 router.patch('/resend', cleanBody, AuthController.ResendCode);
