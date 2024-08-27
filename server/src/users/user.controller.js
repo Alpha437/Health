@@ -365,7 +365,6 @@ exports.Appointment = async (req, res) => {
             { new: true });
     
     return res.send({
-      users: {user, patient},
       success: true,
       message:
         'Appointment has been added',
