@@ -359,7 +359,7 @@ exports.Appointment = async (req, res) => {
     const patient = await User.findOne({name: req.body.patient});
 
     // Add appointment to patient's and doctor's account
-    const appointmentData = {doctor: 'Dr ' + user.name, ...others};
+    const appointmentData = {doctor: 'Dr. ' + user.name, ...others};
     delete appointmentData.patient;
     patient.appointments.push(appointmentData);
     user.appointments.push(others);
