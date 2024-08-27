@@ -350,13 +350,13 @@ exports.GetUsers = async (req, res) => {
 };
 
 exports.GetUser = async (req, res) => {
-  try {
-    const user = await User.findOne({email: email});
-    res.status(200).json(user);
-  } catch (error) {
-      res.status(400).json({ message: error.message });
-  }
-};
+        const { secret } = req.params;
+        const user = await UserSchema.findOne({ secret });
+        if (user) {
+            return res.send({ error: false, message: 'User found', data: user });
+        }
+        return res.send({ error: true, message: 'User not found', data: null });
+    }
 
 exports.Appointment = async (req, res) => {
   try {
