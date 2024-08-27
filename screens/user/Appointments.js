@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { ActivityIndicator, ScrollView, View } from 'react-native';
 import Text from '@kaloraat/react-native-text';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -9,13 +9,14 @@ import {
 } from '../../components/others/AppointmentDates';
 import { AuthContext } from '../../context/auth';
 
-export default function Appointments() {
+export default function Appointments({ navigation }) {
   const [state, setState] = useContext(AuthContext);
+  const [callId, setCallId] = useState('');
 
   const appointments = state?.user.appointments;
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      <ScrollView contentContainerStyle={{ flex: 1, padding: 20 }}>
+      <View style={{ flex: 1, padding: 10, paddingTop: 20 }}>
         <Text large color='#18273b'>
           August 2024
         </Text>
@@ -91,16 +92,22 @@ export default function Appointments() {
           </View>
         </View>
 
-        <View style={{ rowGap: 10 }}>
-          {appointments.length > 0 ? (
-            appointments.map((appointment) => {
+        <ScrollView contentContainerStyle={{ rowGap: 10, padding: 10 }}>
+          {appointments?.length > 0 ? (
+            appointments.map((appointment, index) => {
               if (appointment.status === 'pending') {
                 return (
                   <AppointmentCard
+                    Doctor={appointment.doctor}
+                    key={index}
                     color='#ff7900'
                     bgColor='#ffe2b3'
                     title={'Upcoming'}
                     btnDisplay1='flex'
+                    handlePress1={() => {
+                      setCallId(appointment.callId);
+                      navigation.navigate('Call');
+                    }}
                     btnText1={'Attend Now'}
                     btnTextColor1={'white'}
                     btnBgColor1={'#ff7900'}
@@ -111,6 +118,7 @@ export default function Appointments() {
                 return (
                   <AppointmentCard
                     color='#0db00a'
+                    key={index}
                     bgColor='#e2f8e3'
                     title={'Completed'}
                     btnDisplay1='flex'
@@ -125,6 +133,7 @@ export default function Appointments() {
                 return (
                   <AppointmentCard
                     color='red'
+                    key={index}
                     bgColor='#ffeae5'
                     title={'Canceled'}
                   />
@@ -158,8 +167,8 @@ export default function Appointments() {
             btnColor={'#ff7900'}
           />
           <AppointmentCard color='red' bgColor='#ffeae5' title={'Canceled'} />
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
 
       <FooterTabs />
     </SafeAreaView>

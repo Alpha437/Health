@@ -31,6 +31,13 @@ export default function HomeScreen({ navigation }) {
       }
     }
   }
+  let genDate = function () {
+    let date, time;
+    date = new Date.now();
+    time = date.toLocaleTimeString();
+    date = date.toLocaleDateString();
+    return { date, time };
+  };
 
   useEffect(() => {
     getDoctors();
@@ -150,7 +157,13 @@ export default function HomeScreen({ navigation }) {
                 style={{ flex: 1 }}
               />
             ) : (
-              doctors.map((doctor) => <DoctorDetails doctor={doctor} />)
+              doctors.map((doctor, index) => (
+                <DoctorDetails
+                  key={index}
+                  doctor={doctor}
+                  patientName={state.user.name}
+                />
+              ))
             )}
           </ScrollView>
         </View>

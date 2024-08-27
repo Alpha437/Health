@@ -1,10 +1,19 @@
 import React, { useState } from 'react';
-import { View, Image, TouchableOpacity } from 'react-native';
+import { View, Image, TouchableOpacity, Alert } from 'react-native';
 import Text from '@kaloraat/react-native-text';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import genRandomString from '../call/RandomString';
+import axios from 'axios';
 
-const DoctorDetails = ({ width = 360, handlePress, doctor, patientName }) => {
+const DoctorDetails = ({
+  width = 360,
+  handlePress,
+  doctor,
+  patientName,
+  func,
+  date,
+  time,
+}) => {
   const [loading, setLoading] = useState(false);
   const { name, email } = doctor;
 
@@ -94,21 +103,25 @@ const DoctorDetails = ({ width = 360, handlePress, doctor, patientName }) => {
           width: '90%',
         }}
         onPress={async () => {
-          let date, time;
-          let genDate = function () {
-            date = new Date.now();
-            time = date.toLocaleTimeString();
-            date = date.toLocaleDateString();
-          };
-          genDate();
-          await axios.post('/book', {
-            email,
-            patient: patientName,
-            callId: id,
-            date: date,
-            time: time,
-          });
-          setLoading(false);
+          try {
+            setLoading(true);
+            await axios.post('/book', {
+              email,
+              patient: patientName,
+              callId: id,
+            });
+            setLoading(false);
+            Alert.alert(
+              'Success',
+              'Appointment booked. You wil be notified when the doctor is available.'
+            );
+          } catch (error) {
+            if (error) {
+              Alert.alert('Failed', 'Could not book appointment. Try again.');
+              setLoading(false);
+              console.log(error);
+            }
+          }
         }}
       >
         <FontAwesome5Icon name='calendar' size={20} color='#ff6d00' />

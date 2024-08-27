@@ -29,6 +29,9 @@ export const AppointmentDates = ({ color = '#fff', date, day, ...styles }) => {
 };
 
 export const AppointmentCard = ({
+  Doctor,
+  handlePress1,
+  handlePress2,
   title,
   color,
   bgColor,
@@ -65,7 +68,7 @@ export const AppointmentCard = ({
         />
         <View style={{ flexDirection: 'column', marginLeft: 15 }}>
           <Text bold medium color='black'>
-            Dr. Abram George
+            {Doctor}
           </Text>
           <Text color='#333'>General Physician</Text>
           <View
@@ -93,6 +96,7 @@ export const AppointmentCard = ({
             padding: 15,
             width: width,
           }}
+          onPress={handlePress1}
         >
           <Text center medium color={btnTextColor1}>
             {btnText1}
@@ -109,6 +113,7 @@ export const AppointmentCard = ({
             padding: 15,
             width: width,
           }}
+          onPress={handlePress2}
         >
           <Text center medium color={btnTextColor2}>
             {btnText2}
