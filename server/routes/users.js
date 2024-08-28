@@ -11,6 +11,6 @@ router.patch('/reset', cleanBody, AuthController.ResetPassword);
 router.patch('/resend', cleanBody, AuthController.ResendCode);
 router.post('/send', cleanBody, AuthController.SendCallId);
 router.get('/getAllUsers', cleanBody, AuthController.GetUsers);
-router.get('/getUser/:secret', cleanBody, AuthController.GetUser);
+router.get('/getUser', cleanBody, AuthController.GetUser);
 router.get('/getAllDoctors', cleanBody, AuthController.GetDoctors);
 module.exports = router;
