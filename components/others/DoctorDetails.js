@@ -16,8 +16,6 @@ const DoctorDetails = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const { name, email } = doctor;
-
-  const id = genRandomString(5);
   return (
     <View
       style={{
@@ -108,7 +106,7 @@ const DoctorDetails = ({
             await axios.put('/book', {
               email,
               patient: patientName,
-              callId: id,
+              callId: genRandomString(5),
               status: 'pending',
             });
             setLoading(false);

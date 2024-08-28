@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import { ActivityIndicator, ScrollView, View } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import { ActivityIndicator, Alert, ScrollView, View } from 'react-native';
 import Text from '@kaloraat/react-native-text';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import FooterTabs from '../../components/nav/FooterTabs';
@@ -8,12 +8,27 @@ import {
   AppointmentDates,
 } from '../../components/others/AppointmentDates';
 import { AuthContext } from '../../context/auth';
+import axios from 'axios';
 
 export default function Appointments({ navigation }) {
   const [state, setState] = useContext(AuthContext);
   const [callId, setCallId] = useState('');
+  const [appointments, setAppointments] = useState([]);
+  const getUserAppointments = async () => {
+    try {
+      const { data } = await axios.get(`/getUser/${state.user.email}`);
+      setAppointments(data.data.appointments);
+    } catch (error) {
+      if (error) {
+        console.log(error, 'Could not get user.');
+      }
+    }
+  };
+  useEffect(() => {
+    getUserAppointments();
+  }, []);
 
-  const appointments = state?.user.appointments;
+  // const appointments = state?.user.appointments;
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <View style={{ flex: 1, padding: 10, paddingTop: 20 }}>
@@ -146,27 +161,6 @@ export default function Appointments({ navigation }) {
               You have no appointments.{' '}
             </Text>
           )}
-
-          <AppointmentCard
-            color='#ff7900'
-            bgColor='#ffe2b3'
-            title={'Upcoming'}
-            btnDisplay1='flex'
-            btnText1={'Attend Now'}
-            btnTextColor1={'white'}
-            btnBgColor1={'#ff7900'}
-          />
-          <AppointmentCard
-            color='#0db00a'
-            bgColor='#e2f8e3'
-            title={'Completed'}
-            btnDisplay1='flex'
-            btnText1={'View Details'}
-            btnTextColor1={'#ff7900'}
-            btnBorderWidth={2}
-            btnColor={'#ff7900'}
-          />
-          <AppointmentCard color='red' bgColor='#ffeae5' title={'Canceled'} />
         </ScrollView>
       </View>
 
