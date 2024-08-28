@@ -28,7 +28,6 @@ export default function Appointments({ navigation }) {
     getUserAppointments();
   }, []);
 
-  // const appointments = state?.user.appointments;
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <View style={{ flex: 1, padding: 10, paddingTop: 20 }}>
