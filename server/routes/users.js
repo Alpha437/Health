@@ -6,6 +6,7 @@ router.post('/signup', cleanBody, AuthController.Signup);
 router.post('/login', cleanBody, AuthController.Login);
 router.post('/activate', cleanBody, AuthController.Activate);
 router.put('/book', cleanBody, AuthController.Appointment);
+router.patch('/update', cleanBody, AuthController.Update);
 router.patch('/forgot', cleanBody, AuthController.ForgotPassword);
 router.patch('/reset', cleanBody, AuthController.ResetPassword);
 router.patch('/resend', cleanBody, AuthController.ResendCode);
