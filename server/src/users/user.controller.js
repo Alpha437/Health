@@ -385,7 +385,7 @@ exports.Appointment = async (req, res) => {
 
 exports.Update = async (req, res) => {
   try {
-    const { doctor , patient, status, callId } = req.body;
+    const { doctor , patientName, status, callId } = req.body;
     
     // Find the patient and doctor, and update their appointment status
     const user = await User.findOneAndUpdate(
@@ -394,7 +394,7 @@ exports.Update = async (req, res) => {
             { new: true } 
         );
     
-    const patient = await User.findOneAndUpdate({name: patient, "appointments.callId": callId},
+    const patient = await User.findOneAndUpdate({name: patientName, "appointments.callId": callId},
             { $set: { "appointments.$.status": status } },
             { new: true });
     
