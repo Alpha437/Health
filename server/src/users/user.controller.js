@@ -382,3 +382,28 @@ exports.Appointment = async (req, res) => {
     res.status(500).json({ message: error.message});
   }
 };
+
+exports.Update = async (req, res) => {
+  try {
+    const { doctor , patient, status, callId } = req.body;
+    
+    // Find the patient and doctor, and update their appointment status
+    const user = await User.findOneAndUpdate(
+      {email: doctor , "appointments.callId": callId},
+            { $set: { "appointments.$.status": status } },
+            { new: true } 
+        );
+    
+    const patient = await User.findOneAndUpdate({name: patient, "appointments.callId": callId},
+            { $set: { "appointments.$.status": status } },
+            { new: true });
+    
+    return res.send({
+      success: true,
+      message:
+        'Appointment has been updated',
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message});
+  }
+};
