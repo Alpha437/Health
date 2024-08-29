@@ -399,6 +399,7 @@ exports.Update = async (req, res) => {
             { new: true });
     
     return res.send({
+      patient: patient,
       success: true,
       message:
         'Appointment has been updated',
