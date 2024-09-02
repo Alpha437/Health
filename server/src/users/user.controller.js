@@ -402,7 +402,7 @@ exports.Update = async (req, res) => {
       { $set: { "appointments.$.status": status } },
       { new: true } 
     );
-    const doctor = await User.findOneAndUpdate(
+    const user = await User.findOneAndUpdate(
       {name: doctor , "appointments.callId": callId},
             { $set: { "appointments.$.status": status } },
             { new: true } 
