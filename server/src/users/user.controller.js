@@ -363,15 +363,24 @@ exports.Appointment = async (req, res) => {
     const { email, ...others } = req.body;
     
     // Find the patient and doctor
-    const user = await User.findOneAndUpdate(
+    const user = await User.findOne({email: email});
+    const patient = await User.findOne({name: req.body.patient});
+    const appointmentDataDoc = { id: user.appointments.length + 1, ...others };
+    
+    await User.findOneAndUpdate(
       {email: email},
-            { $push: { appointments: others } },
-            { new: true } 
-        );
-    const appointmentData = { doctor: 'Dr. ' + user.name, ...others};
-    delete appointmentData.patient;
-    const patient = await User.findOneAndUpdate({name: req.body.patient}, { $push: { appointments: appointmentData } },
-            { new: true });
+      { $push: { appointments: appointmentDataDoc } },
+      { new: true } 
+    );
+
+    
+    const appointmentDataPatient = { id: patient.appointments.length + 1, doctor: 'Dr. ' + user.name, ...others};
+    delete appointmentDataPatient.patient;
+    await User.findOneAndUpdate(
+      {name: req.body.patient}, 
+      { $push: { appointments: appointmentData } },
+      { new: true }
+    );
     
     return res.send({
       success: true,
@@ -387,12 +396,12 @@ exports.Update = async (req, res) => {
   try {
     const { email, patientName, callId, status } = req.body;
     
-    // Find the patient and doctor, and update their appointment status
+    // Find the patient and doctor, and update their appointment status    
     const user = await User.findOneAndUpdate(
       {email: email , "appointments.callId": callId},
-            { $set: { "appointments.$.status": status } },
-            { new: true } 
-        );
+      { $set: { "appointments.$.status": status } },
+      { new: true } 
+    );
     const patient = await User.findOneAndUpdate(
       {name: patientName , "appointments.callId": callId},
             { $set: { "appointments.$.status": status } },
@@ -400,7 +409,6 @@ exports.Update = async (req, res) => {
         );
     
     return res.send({
-      patient: patient,
       success: true,
       message:
         'Appointment has been updated',
