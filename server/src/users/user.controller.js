@@ -394,16 +394,11 @@ exports.Appointment = async (req, res) => {
 
 exports.Update = async (req, res) => {
   try {
-    const { email, doctor, callId, status } = req.body;
+    const { email, callId, status } = req.body;
     
-    // Find the patient and doctor, and update their appointment status    
-    const patient = await User.findOneAndUpdate(
-      {email: email , "appointments.callId": callId},
-      { $set: { "appointments.$.status": status } },
-      { new: true } 
-    );
+    // Find the patient and doctor, and update their appointment status   
     const user = await User.findOneAndUpdate(
-      {name: doctor , "appointments.callId": callId},
+      {email: email , "appointments.callId": callId},
             { $set: { "appointments.$.status": status } },
             { new: true } 
         );
