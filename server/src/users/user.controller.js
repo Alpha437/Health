@@ -378,7 +378,7 @@ exports.Appointment = async (req, res) => {
     delete appointmentDataPatient.patient;
     await User.findOneAndUpdate(
       {name: req.body.patient}, 
-      { $push: { appointments: appointmentData } },
+      { $push: { appointments: appointmentDataPatient } },
       { new: true }
     );
     
