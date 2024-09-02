@@ -374,7 +374,7 @@ exports.Appointment = async (req, res) => {
     );
 
     
-    const appointmentDataPatient = { id: patient.appointments.length + 1, doctor: 'Dr. ' + user.name, ...others};
+    const appointmentDataPatient = { id: patient.appointments.length + 1, doctor: user.name, ...others};
     delete appointmentDataPatient.patient;
     await User.findOneAndUpdate(
       {name: req.body.patient}, 
