@@ -360,12 +360,12 @@ exports.GetUser = async (req, res) => {
 
 exports.Appointment = async (req, res) => {
   try {
-    const { email, ...others } = req.body;
+    const { email, patientEmail, ...others } = req.body;
     
     // Find the patient and doctor
     const user = await User.findOne({email: email});
-    const patient = await User.findOne({name: req.body.patient});
-    const appointmentDataDoc = { id: user.appointments.length + 1, ...others };
+    const patient = await User.findOne({email: patientEmail});
+    const appointmentDataDoc = { id: user.appointments.length + 1, ...others, patientEmail: patientEmail };
     
     await User.findOneAndUpdate(
       {email: email},
@@ -377,7 +377,7 @@ exports.Appointment = async (req, res) => {
     const appointmentDataPatient = { id: patient.appointments.length + 1, doctor: user.name, ...others};
     delete appointmentDataPatient.patient;
     await User.findOneAndUpdate(
-      {name: req.body.patient}, 
+      {email: patientEmail}, 
       { $push: { appointments: appointmentDataPatient } },
       { new: true }
     );
