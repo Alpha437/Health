@@ -10,6 +10,7 @@ const DoctorDetails = ({
   handlePress,
   doctor,
   patientName,
+  patientEmail,
   func,
   date,
   time,
@@ -105,7 +106,8 @@ const DoctorDetails = ({
             setLoading(true);
             await axios.put('/book', {
               email,
-              patient: patientName,
+              patientEmail: patientEmail,
+              patientName: patientName,
               callId: genRandomString(5),
               status: 'pending',
             });

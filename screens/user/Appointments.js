@@ -14,13 +14,17 @@ export default function Appointments({ navigation }) {
   const [state, setState] = useContext(AuthContext);
   const [callId, setCallId] = useState('');
   const [appointments, setAppointments] = useState([]);
+  const [loading, setLoading] = useState(false);
   const getUserAppointments = async () => {
     try {
+      setLoading(true);
       const { data } = await axios.get(`/getUser/${state.user.email}`);
       setAppointments(data.data.appointments);
+      setLoading(false);
     } catch (error) {
       if (error) {
         console.log(error, 'Could not get user.');
+        setLoading(false);
       }
     }
   };
@@ -107,58 +111,94 @@ export default function Appointments({ navigation }) {
         </View>
 
         <ScrollView contentContainerStyle={{ rowGap: 10, padding: 10 }}>
-          {appointments?.length > 0 ? (
-            appointments.map((appointment, index) => {
-              if (appointment.status === 'pending') {
-                return (
-                  <AppointmentCard
-                    Doctor={appointment.doctor}
-                    key={index}
-                    color='#ff7900'
-                    bgColor='#ffe2b3'
-                    title={'Upcoming'}
-                    btnDisplay1='flex'
-                    handlePress1={() => {
-                      setCallId(appointment.callId);
-                      navigation.navigate('Call');
-                    }}
-                    btnText1={'Attend Now'}
-                    btnTextColor1={'white'}
-                    btnBgColor1={'#ff7900'}
-                  />
-                );
-              }
-              if (appointment.status === 'completed') {
-                return (
-                  <AppointmentCard
-                    color='#0db00a'
-                    key={index}
-                    bgColor='#e2f8e3'
-                    title={'Completed'}
-                    btnDisplay1='flex'
-                    btnText1={'View Details'}
-                    btnTextColor1={'#ff7900'}
-                    btnBorderWidth={2}
-                    btnColor={'#ff7900'}
-                  />
-                );
-              }
-              if (appointment.status === 'canceled') {
-                return (
-                  <AppointmentCard
-                    color='red'
-                    key={index}
-                    bgColor='#ffeae5'
-                    title={'Canceled'}
-                  />
-                );
-              }
-            })
+          {!loading ? (
+            appointments?.length > 0 ? (
+              appointments
+                .sort((a, b) => b.id - a.id)
+                .map((appointment) => {
+                  if (appointment.status === 'pending') {
+                    return (
+                      <AppointmentCard
+                        Doctor={appointment.doctor}
+                        key={appointment.id}
+                        color='#ff7900'
+                        bgColor='#ffe2b3'
+                        title={'Pending'}
+                        btnDisplay1='flex'
+                        handlePress1={() => {
+                          Alert.alert(
+                            'Please Wait...',
+                            'The doctor is not ready for you yet. You will be notified when your appointment is accepted.'
+                          );
+                        }}
+                        btnText1={'Check Status'}
+                        btnTextColor1={'white'}
+                        btnBgColor1={'#ff7900'}
+                      />
+                    );
+                  }
+                  if (appointment.status === 'upcoming') {
+                    return (
+                      <AppointmentCard
+                        Doctor={appointment.doctor}
+                        key={appointment.id}
+                        color='#ff7900'
+                        bgColor='#ffe2b3'
+                        title={'Upcoming'}
+                        btnDisplay1='flex'
+                        handlePress1={async () => {
+                          try {
+                            setCallId(appointment.callId);
+                            await axios.patch('/update', {
+                              email: state.user.email,
+                              appointmentId: appointment.id,
+                              status: 'completed',
+                            });
+                            navigation.navigate('Call');
+                          } catch (error) {
+                            console.log(error);
+                          }
+                        }}
+                        btnText1={'Attend Now'}
+                        btnTextColor1={'white'}
+                        btnBgColor1={'#ff7900'}
+                      />
+                    );
+                  }
+                  if (appointment.status === 'completed') {
+                    return (
+                      <AppointmentCard
+                        color='#0db00a'
+                        key={appointment.id}
+                        bgColor='#e2f8e3'
+                        title={'Completed'}
+                        btnDisplay1='flex'
+                        btnText1={'View Details'}
+                        btnTextColor1={'#ff7900'}
+                        btnBorderWidth={2}
+                        btnColor={'#ff7900'}
+                      />
+                    );
+                  }
+                  if (appointment.status === 'canceled') {
+                    return (
+                      <AppointmentCard
+                        color='red'
+                        key={appointment.id}
+                        bgColor='#ffeae5'
+                        title={'Canceled'}
+                      />
+                    );
+                  }
+                })
+            ) : (
+              <Text large center>
+                {' '}
+                You have no appointments.{' '}
+              </Text>
+            )
           ) : (
-            <Text large center>
-              {' '}
-              You have no appointments.{' '}
-            </Text>
+            <ActivityIndicator size='large' color='#333' style={{ flex: 1 }} />
           )}
         </ScrollView>
       </View>

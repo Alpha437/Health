@@ -30,6 +30,7 @@ export const AppointmentDates = ({ color = '#fff', date, day, ...styles }) => {
 
 export const AppointmentCard = ({
   Doctor,
+  Patient,
   handlePress1,
   handlePress2,
   title,
@@ -68,7 +69,7 @@ export const AppointmentCard = ({
         />
         <View style={{ flexDirection: 'column', marginLeft: 15 }}>
           <Text bold medium color='black'>
-            {Doctor}
+            {Doctor ? 'Dr. ' + Doctor : Patient}
           </Text>
           <Text color='#333'>General Physician</Text>
           <View

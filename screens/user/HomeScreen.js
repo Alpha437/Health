@@ -162,6 +162,7 @@ export default function HomeScreen({ navigation }) {
                   key={index}
                   doctor={doctor}
                   patientName={state.user.name}
+                  patientEmail={state.user.email}
                 />
               ))
             )}

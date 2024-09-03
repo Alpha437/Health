@@ -59,7 +59,6 @@ export default function Menu() {
           ></View>
 
           <View style={{ rowGap: 20, marginVertical: 20 }}>
-            <MenuTab icon1='wallet' title='Wallet' icon2='arrow-right' />
             <MenuTab
               icon1='wrench'
               title='Account Settings'
@@ -78,17 +77,17 @@ export default function Menu() {
           ></View>
 
           <View style={{ rowGap: 20, marginTop: 20 }}>
-            <MenuTab icon1='file' title='Wallet' icon2='arrow-right' />
+            <MenuTab
+              icon1='file'
+              title='Terms and Conditions'
+              icon2='arrow-right'
+            />
             <MenuTab
               icon1='newspaper'
-              title='Account Settings'
+              title='News & Bloggs'
               icon2='arrow-right'
             />
-            <MenuTab
-              icon1='headphones'
-              title='Change Password'
-              icon2='arrow-right'
-            />
+            <MenuTab icon1='headphones' title='Support' icon2='arrow-right' />
           </View>
 
           <TouchableOpacity
