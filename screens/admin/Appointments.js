@@ -143,6 +143,9 @@ export default function Appointments({ navigation }) {
                               appointmentId: appointment.id,
                               status: 'upcoming',
                             });
+
+                            // Reload appointments
+                            getUserAppointments();
                           } catch (error) {
                             console.log(error);
                           }
@@ -166,6 +169,9 @@ export default function Appointments({ navigation }) {
                               appointmentId: appointment.id,
                               status: 'canceled',
                             });
+
+                            // Reload appointments
+                            getUserAppointments();
                           } catch (error) {
                             console.log(error);
                           }

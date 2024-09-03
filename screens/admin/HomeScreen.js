@@ -170,26 +170,16 @@ export default function HomeScreen({ navigation }) {
             }}
           >
             <Text large color='black'>
-              Top Doctors
+              Visits
             </Text>
             <Text color='#333'>See All</Text>
           </View>
-          <ScrollView
-            horizontal={true}
-            contentContainerStyle={{
-              flexGrow: 1,
+          <View
+            style={{
               padding: 10,
-              columnGap: 10,
               backgroundColor: 'white',
-
-              width: 2000,
             }}
-          >
-            <DoctorDetails />
-            <DoctorDetails />
-            <DoctorDetails />
-            <DoctorDetails />
-          </ScrollView>
+          ></View>
         </View>
         {/* Doctors */}
         <View style={{ flex: 1, flexDirection: 'column' }}>
