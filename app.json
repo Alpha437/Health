@@ -36,8 +36,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff",
-        
+        "backgroundColor": "#ffffff"
       },
       "extraMavenRepos": [
         "../../node_modules/@notifee/react-native/android/libs"

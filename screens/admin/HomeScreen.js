@@ -159,27 +159,18 @@ export default function HomeScreen({ navigation }) {
         </View>
 
         {/* Visits */}
-        <View style={{ flex: 1, flexDirection: 'column' }}>
+        <View style={{ flex: 1, flexDirection: 'column', padding: 10 }}>
+          <Text large color='black'>
+            Visits
+          </Text>
           <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              backgroundColor: 'white',
-              alignItems: 'center',
-              padding: 10,
-            }}
+            style={{ height: 250, paddingHorizontal: 5, paddingVertical: 10 }}
           >
-            <Text large color='black'>
-              Visits
-            </Text>
-            <Text color='#333'>See All</Text>
+            <Image
+              source={require('../../images/visits.png')}
+              style={{ width: '100%' }}
+            />
           </View>
-          <View
-            style={{
-              padding: 10,
-              backgroundColor: 'white',
-            }}
-          ></View>
         </View>
         {/* Doctors */}
         <View style={{ flex: 1, flexDirection: 'column' }}>
@@ -213,89 +204,6 @@ export default function HomeScreen({ navigation }) {
             <HealthArticle />
             <HealthArticle />
           </ScrollView>
-        </View>
-
-        {/* How to book appointments */}
-        <View
-          style={{ backgroundColor: 'white', padding: 10, paddingVertical: 20 }}
-        >
-          <Text large color='black'>
-            Book an appointment in three easy steps
-          </Text>
-          <View style={{ marginTop: 20, flexDirection: 'column', rowGap: 10 }}>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-              }}
-            >
-              <FontAwesome5Icon
-                name='search'
-                size={20}
-                style={{
-                  backgroundColor: '#ff6d00',
-                  padding: 15,
-                  borderRadius: 10,
-                  color: 'white',
-                }}
-              />
-              <Text
-                medium
-                color='#30005e'
-                style={{ flex: 1, flexWrap: 'wrap', marginLeft: 20 }}
-              >
-                Search for doctors by speciality, service or disease.
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-              }}
-            >
-              <FontAwesome5Icon
-                name='bookmark'
-                size={20}
-                style={{
-                  backgroundColor: '#ff6d00',
-                  padding: 15,
-                  borderRadius: 10,
-                  color: 'white',
-                }}
-              />
-              <Text
-                medium
-                color='#30005e'
-                style={{ flex: 1, flexWrap: 'wrap', marginLeft: 20 }}
-              >
-                Book and confirm appointment within seconds.
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-              }}
-            >
-              <FontAwesome5Icon
-                name='check'
-                size={15}
-                style={{
-                  backgroundColor: '#ff6d00',
-                  padding: 15,
-                  borderRadius: 10,
-                  color: 'white',
-                }}
-              />
-              <Text
-                medium
-                color='#30005e'
-                style={{ flex: 1, flexWrap: 'wrap', marginLeft: 20 }}
-              >
-                Select based on experience, fee or rating
-              </Text>
-            </View>
-          </View>
         </View>
       </ScrollView>
 

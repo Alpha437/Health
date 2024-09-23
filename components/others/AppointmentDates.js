@@ -33,6 +33,7 @@ export const AppointmentCard = ({
   Patient,
   handlePress1,
   handlePress2,
+  symptoms,
   title,
   color,
   bgColor,
@@ -71,7 +72,13 @@ export const AppointmentCard = ({
           <Text bold medium color='black'>
             {Doctor ? 'Dr. ' + Doctor : Patient}
           </Text>
-          <Text color='#333'>General Physician</Text>
+          <Text color='#333'>
+            {symptoms
+              ? symptoms.slice(0, symptoms.length - 1).join(', ') +
+                ' and ' +
+                symptoms.slice()[symptoms.length - 1]
+              : 'General Physician'}
+          </Text>
           <View
             style={{
               paddingVertical: 5,

@@ -4,6 +4,7 @@ import { AuthContext, AuthProvider } from './context/auth';
 import AppNavigator from './components/nav/AppNavigator';
 import AdminNavigator from './components/nav/AdminNavigator';
 import AuthNavigator from './components/nav/AuthNavigator';
+import * as SplashScreen from 'expo-splash-screen';
 
 function RootNavigator() {
   const [state, setState] = useContext(AuthContext);

@@ -35,7 +35,8 @@ export default function AdminNavigator() {
         name='Appointments'
         component={Appointments}
         options={{
-          headerBackVisible: true,
+          headerBackVisible: false,
+          headerShown: false,
         }}
       />
       <Stack.Screen
@@ -49,7 +50,8 @@ export default function AdminNavigator() {
         name='Call'
         component={CallScreen}
         options={{
-          headerBackVisible: true,
+          headerBackVisible: false,
+          headerShown: false,
         }}
       />
       <Stack.Screen

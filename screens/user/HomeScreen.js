@@ -5,6 +5,9 @@ import {
   View,
   TouchableOpacity,
   ActivityIndicator,
+  Modal,
+  TextInput,
+  Alert,
 } from 'react-native';
 import Text from '@kaloraat/react-native-text';
 import { AuthContext } from '../../context/auth';
@@ -18,7 +21,10 @@ export default function HomeScreen({ navigation }) {
   const [state, setState] = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const [callId, setCallId] = useState('');
-  const [doctors, setDoctors] = useState('');
+  const [doctors, setDoctors] = useState([]);
+  const [appointmentBookData, setAppointmentBookData] = useState({});
+  const [symptoms, setSypmtoms] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
 
   async function getDoctors() {
     try {
@@ -35,6 +41,7 @@ export default function HomeScreen({ navigation }) {
     let date, time;
     date = new Date.now();
     time = date.toLocaleTimeString();
+    z;
     date = date.toLocaleDateString();
     return { date, time };
   };
@@ -150,7 +157,7 @@ export default function HomeScreen({ navigation }) {
               backgroundColor: 'white',
             }}
           >
-            {loading ? (
+            {loading && doctors.length == 0 ? (
               <ActivityIndicator
                 size='large'
                 color='#333'
@@ -161,6 +168,11 @@ export default function HomeScreen({ navigation }) {
                 <DoctorDetails
                   key={index}
                   doctor={doctor}
+                  handlePress={(appointmentData) => {
+                    setAppointmentBookData(appointmentData);
+                    setModalVisible(true);
+                    console.log(appointmentData);
+                  }}
                   patientName={state.user.name}
                   patientEmail={state.user.email}
                 />
@@ -168,6 +180,124 @@ export default function HomeScreen({ navigation }) {
             )}
           </ScrollView>
         </View>
+        <Modal
+          animationType='fade'
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert(
+              'Notice',
+              'Appointment has not been booked! Are you sure you want to cancel?',
+              [
+                {
+                  text: 'No',
+                  style: 'cancel',
+                },
+                {
+                  text: 'Yes',
+                  onPress: () => {
+                    setModalVisible(!modalVisible);
+                  },
+                },
+              ]
+            );
+          }}
+        >
+          <View
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              backgroundColor: 'rgba(0, 0, 0, 0.2)',
+            }}
+          >
+            <View
+              style={{
+                margin: 20,
+                backgroundColor: 'white',
+                borderRadius: 20,
+                padding: 35,
+                alignItems: 'center',
+                shadowColor: '#000',
+                shadowOffset: {
+                  width: 0,
+                  height: 2,
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 4,
+                elevation: 5,
+              }}
+            >
+              <View
+                style={{
+                  justifyContent: 'center',
+                  width: '100%',
+                }}
+              >
+                <Text medium>
+                  Describe your symptoms in clear words (i.e Headache, Migraine,
+                  Backpain, Fever etc.)
+                </Text>
+                <TextInput
+                  multiline={true}
+                  numberOfLines={4}
+                  onChangeText={(text) => {
+                    setSypmtoms(text);
+                  }}
+                  style={{
+                    borderBottomWidth: 0.5,
+                    height: 48,
+                    borderBottomColor: '#333',
+                    marginBottom: 30,
+                    width: '100%',
+                  }}
+                />
+
+                <TouchableOpacity
+                  onPress={async () => {
+                    try {
+                      setLoading(true);
+                      if (symptoms === '') {
+                        setLoading(false);
+                        alert('Enter your symptoms');
+                        return;
+                      }
+                      await axios.put('/book', {
+                        ...appointmentBookData,
+                        symptoms: symptoms.split(','),
+                      });
+                      setLoading(false);
+                      setModalVisible(!modalVisible);
+                      Alert.alert(
+                        'Success',
+                        'Appointment booked. You wil be notified when the doctor is available.'
+                      );
+                    } catch (error) {
+                      if (error) {
+                        Alert.alert(
+                          'Failed',
+                          'Could not book appointment. Try again.'
+                        );
+                        setLoading(false);
+                        console.log(error);
+                      }
+                    }
+                  }}
+                  style={{
+                    width: 150,
+                    padding: 10,
+                    backgroundColor: '#ff6d00',
+                    alignSelf: 'flex-end',
+                    borderRadius: 5,
+                  }}
+                >
+                  <Text medium center color={'white'}>
+                    {loading ? 'Please wait' : 'CONTINUE'}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </Modal>
 
         {/* Download Prescription */}
         <TouchableOpacity

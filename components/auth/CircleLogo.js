@@ -3,14 +3,14 @@ import { View, Image } from 'react-native';
 
 const CircleLogo = () => (
   <View
-  style={{
-    justifyContent: 'center',
-    alignItems: 'center',
-  }}
+    style={{
+      justifyContent: 'center',
+      alignItems: 'center',
+    }}
   >
     <Image
-      source={require('../../assets/logo.png')}
-      style={{ width: 200, height: 200, marginVertical: 20 }}
+      source={require('../../assets/icon.png')}
+      style={{ width: 200, height: 200, marginVertical: 20, borderRadius: 100 }}
     />
   </View>
 );
